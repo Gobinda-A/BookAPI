@@ -12,8 +12,10 @@ import java.util.Map;
 @Service
 public class BookService {
     private Map<Integer,Book> bookList=new HashMap<>();
+    private int idNext=1;
 
     public Book createBook(Book book){
+        book.setId(idNext++);
         bookList.put(book.getId(),book);
         return book;
     }
@@ -23,6 +25,7 @@ public class BookService {
     }
 
     public List<Book> getAllBooks(){
+
         return new ArrayList<>(bookList.values());
     }
 
@@ -32,8 +35,7 @@ public class BookService {
         return book;
     }
 
-    public String deleteBook(int id){
+    public void deleteBook(int id){
        bookList.remove(id);
-       return String.format("Book with id: %s was deleted",id);
     }
 }
